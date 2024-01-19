@@ -30,7 +30,6 @@ interface AuthContextData {
   signed: boolean
   signin: (email: string, password: string) => Promise<string | undefined>
   signup: (data: signupProps) => Promise<string>
-  verifySigned: () => boolean
 }
 
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
@@ -42,8 +41,7 @@ interface AuthProviderProps {
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User>()
   const [token, setToken] = useState<string>()
-  const [signed, setSigned] = useState(false)
-
+  const [signed, setSigned] = useState<boolean>(true)
   useEffect(() => {
     loadingStorageData()
   }, [])
@@ -56,22 +54,11 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setToken(storagedToken)
       api.defaults.headers.Authorization = `Bearer ${storagedToken}`
       setSigned(true)
-    }
-  }
-  const verifySigned = () => {
-    const storagedUser = localStorage.getItem('@Nos-Web-App:user')
-    const storagedToken = localStorage.getItem('@Nos-Web-App:token')
-    if (storagedUser && storagedToken) {
-      setUser(JSON.parse(storagedUser))
-      setToken(storagedToken)
-      api.defaults.headers.Authorization = `Bearer ${storagedToken}`
-    }
-    if (token && user) {
-      return true
     } else {
-      return false
+      setSigned(false)
     }
   }
+
   const signin = async (email: string, password: string) => {
     const response = await api
       .post('/users/signin', {
@@ -123,7 +110,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         signed,
         signin,
         signup,
-        verifySigned,
       }}
     >
       {children}
