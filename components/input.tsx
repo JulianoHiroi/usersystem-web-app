@@ -26,7 +26,7 @@ const Input: React.FC<InputProps> = ({
 
   return (
     <div className={'flex flex-col' + (className ? ' ' + className : '')}>
-      <label htmlFor="label">{text}</label>
+      <label >{text}</label>
       <input
         className={inputCSS + (error ? ' border-red-500' : '')}
         name={name}

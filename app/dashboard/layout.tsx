@@ -1,6 +1,6 @@
 'use client'
 
-import { useContext } from 'react'
+import { useContext, useEffect } from 'react'
 import { AuthContext } from '../../hooks/auth'
 import { useRouter } from 'next/navigation'
 
@@ -11,9 +11,11 @@ export default function DashboardLayout({
 }) {
   const router = useRouter()
   const { signed } = useContext(AuthContext)
-  if (!signed) {
-    router.push('/')
-  }
+  useEffect(() => {
+    if (!signed) {
+      router.push('/')
+    }
+  }, [signed])
 
   return <section>{children}</section>
 }

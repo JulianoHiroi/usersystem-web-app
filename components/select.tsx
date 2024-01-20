@@ -5,7 +5,7 @@ type SelectProps = {
   name: string
   value?: string
   text: string
-  htmlFor?: string
+
   options: { name: string; value: string }[]
   error?: boolean
   className?: string
@@ -16,7 +16,6 @@ const Select: React.FC<SelectProps> = ({
   id,
   name,
   value,
-  htmlFor,
   text,
   options,
   className,
@@ -25,7 +24,7 @@ const Select: React.FC<SelectProps> = ({
 }) => {
   return (
     <div className="mb-4">
-      <label htmlFor={htmlFor || 'select'} className={className || ''}>
+      <label className={className || ''}>
         {text}
       </label>
       <select

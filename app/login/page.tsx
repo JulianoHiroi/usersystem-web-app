@@ -1,6 +1,6 @@
 'use client'
 import Image from 'next/image'
-import Logo from '../../assets/logo-no-background.svg'
+import Logo from '../../components/logo'
 import Input from '../../components/input'
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../hooks/auth'
@@ -33,13 +33,7 @@ export default function Login() {
 
   return (
     <div className=" align-center  flex h-screen items-center justify-center bg-teal-500 ">
-      <Image
-        src={Logo}
-        width={150}
-        height={150}
-        alt="Picture of the logo"
-        className="absolute left-10 top-10"
-      />
+      <Logo />
 
       <div className=" flex w-min flex-col rounded-2xl bg-white p-10">
         <h1 className="mb-4  text-3xl font-bold">Login</h1>
@@ -50,6 +44,7 @@ export default function Login() {
             name="email"
             handleOnChange={handleOnChange}
             error={error}
+
           />
           <Input
             text="Senha"

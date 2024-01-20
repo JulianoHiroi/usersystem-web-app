@@ -30,6 +30,7 @@ interface AuthContextData {
   signed: boolean
   signin: (email: string, password: string) => Promise<string | undefined>
   signup: (data: signupProps) => Promise<string>
+  signout: () => void
 }
 
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
@@ -73,6 +74,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
         setUser(user)
         setToken(token)
+        setSigned(true)
         console.log('success sign in')
         return 'success'
       })
@@ -101,6 +103,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       })
     return response
   }
+  const signout = () => {
+    localStorage.clear()
+    setUser(undefined)
+    setToken(undefined)
+    setSigned(false)
+    api.defaults.headers.Authorization = `Bearer`
+  }
+
 
   return (
     <AuthContext.Provider
@@ -110,6 +120,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         signed,
         signin,
         signup,
+        signout,
       }}
     >
       {children}
