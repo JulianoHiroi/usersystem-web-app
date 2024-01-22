@@ -18,6 +18,25 @@ class ProjectService {
     const response = await api.delete(`projects/${id}`)
     return response.data
   }
+
+  async joinProject(projectId: string) {
+    const response = await api
+      .patch(`/projects/invite/${projectId}`)
+      .then(() => {
+        return 'sucess'
+      })
+      .catch((error) => {
+        if (
+          error.response.data.message ===
+          'User already connected to this project'
+        ) {
+          return 'userAlreadyInProject'
+        }
+        return 'error'
+      })
+
+    return response
+  }
 }
 const projectService = new ProjectService()
 export default projectService

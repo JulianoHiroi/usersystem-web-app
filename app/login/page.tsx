@@ -3,8 +3,9 @@ import Image from 'next/image'
 import Logo from '../../components/logo'
 import Input from '../../components/input'
 import React, { useContext, useState } from 'react'
-import { AuthContext } from '../../hooks/auth'
 import { useRouter } from 'next/navigation'
+import { AuthContext } from '../../hooks/auth'
+
 import Link from 'next/link'
 
 export default function Login() {
@@ -21,6 +22,7 @@ export default function Login() {
   }
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
+
     const response = await signin(email, password)
 
     if (response === 'error') {
@@ -44,7 +46,6 @@ export default function Login() {
             name="email"
             handleOnChange={handleOnChange}
             error={error}
-
           />
           <Input
             text="Senha"
@@ -55,8 +56,12 @@ export default function Login() {
             error={error}
             className="mt-5"
           />
+
           <div className="mt-1 flex justify-between align-middle">
-            <Link href="/" className=" cursor-pointer  text-xs text-blue-600 ">
+            <Link
+              href="/recovery-password"
+              className=" cursor-pointer  text-xs text-blue-600 "
+            >
               Esqueceu a senha?
             </Link>{' '}
             <Link

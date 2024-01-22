@@ -1,9 +1,8 @@
 'use client'
 
-import { useContext, useEffect } from 'react'
+import { Suspense, useContext, useEffect } from 'react'
 import { AuthContext } from '../../hooks/auth'
 import { useRouter } from 'next/navigation'
-
 export default function DashboardLayout({
   children,
 }: {
@@ -13,7 +12,7 @@ export default function DashboardLayout({
   const { signed } = useContext(AuthContext)
   useEffect(() => {
     if (!signed) {
-      router.push('/')
+      router.push('/login')
     }
   }, [signed])
 

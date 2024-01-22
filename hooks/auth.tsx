@@ -75,11 +75,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         setUser(user)
         setToken(token)
         setSigned(true)
-        console.log('success sign in')
         return 'success'
       })
-      .catch((error) => {
-        console.log(error)
+      .catch(() => {
         return 'error'
       })
     return response
@@ -110,7 +108,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setSigned(false)
     api.defaults.headers.Authorization = `Bearer`
   }
-
 
   return (
     <AuthContext.Provider

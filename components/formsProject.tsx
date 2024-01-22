@@ -15,7 +15,6 @@ export default function FormsProject({ handleData }: formsProjectProps) {
   })
   const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(project)
     handleData(project)
   }
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
