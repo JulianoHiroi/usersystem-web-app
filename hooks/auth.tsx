@@ -8,6 +8,7 @@ import React, {
   useEffect,
 } from 'react'
 import api from '../services/api'
+import { useRouter } from 'next/navigation'
 
 interface User {
   id: string
@@ -31,6 +32,7 @@ interface AuthContextData {
   signin: (email: string, password: string) => Promise<string | undefined>
   signup: (data: signupProps) => Promise<string>
   signout: () => void
+  setAuthUser: (user: User) => void
 }
 
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData)
@@ -43,6 +45,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User>()
   const [token, setToken] = useState<string>()
   const [signed, setSigned] = useState<boolean>(true)
+  const router = useRouter()
   useEffect(() => {
     loadingStorageData()
   }, [])
@@ -59,7 +62,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       setSigned(false)
     }
   }
-
+  const setAuthUser = (user: User) => {
+    setUser(user)
+    localStorage.setItem('@Nos-Web-App:user', JSON.stringify(user))
+  }
   const signin = async (email: string, password: string) => {
     const response = await api
       .post('/users/signin', {
@@ -94,6 +100,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           JSON.stringify(response.data.user),
         )
         api.defaults.headers.Authorization = `Bearer ${response.data.token}`
+        setSigned(true)
         return 'sucess'
       })
       .catch((error) => {
@@ -102,6 +109,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     return response
   }
   const signout = () => {
+    router.push('/')
     localStorage.clear()
     setUser(undefined)
     setToken(undefined)
@@ -118,6 +126,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         signin,
         signup,
         signout,
+        setAuthUser,
       }}
     >
       {children}

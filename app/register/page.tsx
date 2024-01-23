@@ -1,11 +1,10 @@
 'use client'
 import Logo from '../../components/logo'
-import Input from '../../components/input'
 import React, { useContext, useState } from 'react'
 import { AuthContext } from '../../hooks/auth'
 import { useRouter } from 'next/navigation'
-import Select from '../../components/select'
 import Link from 'next/link'
+import { FormsUser } from '../../components/formsUser'
 
 type dataProps = {
   name: string
@@ -14,33 +13,29 @@ type dataProps = {
   gender: string
   password: string
 }
-type errorProps = {
-  name: boolean
+export type errorFormsUserProps = {
+  name: { value: boolean; msg: string }
   email: { value: boolean; msg: string }
-  date_of_birth: boolean
-  gender: boolean
+  date_of_birth: { value: boolean; msg: string }
+  gender: { value: boolean; msg: string }
   password: { value: boolean; msg: string }
 }
 export default function Register() {
   const [data, setData] = useState<dataProps>({} as dataProps)
   const [verifyPassword, setVerifyPassword] = useState('')
-  const [errors, setErrors] = useState<errorProps>({
-    name: false,
+  const [errors, setErrors] = useState<errorFormsUserProps>({
+    name: { value: false, msg: '' },
     email: { value: false, msg: '' },
-    gender: false,
-    date_of_birth: false,
+    gender: { value: false, msg: '' },
+    date_of_birth: { value: false, msg: '' },
     password: { value: false, msg: '' },
   })
   const router = useRouter()
   const { signup } = useContext(AuthContext)
-  const options = [
-    { name: 'Masculino', value: 'M' },
-    { name: 'Feminino', value: 'F' },
-  ]
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.name === 'name') {
       setData({ ...data, name: e.target.value })
-      setErrors({ ...errors, name: false })
+      setErrors({ ...errors, name: { value: false, msg: '' } })
     }
     if (e.target.name === 'email') {
       setData({ ...data, email: e.target.value })
@@ -56,13 +51,13 @@ export default function Register() {
     }
     if (e.target.name === 'date_of_birth') {
       setData({ ...data, date_of_birth: new Date(e.target.value) })
-      setErrors({ ...errors, date_of_birth: false })
+      setErrors({ ...errors, date_of_birth: { value: false, msg: '' } })
     }
   }
 
   const handleOnChangeSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setData({ ...data, gender: e.target.value })
-    setErrors({ ...errors, gender: false })
+    setErrors({ ...errors, gender: { value: false, msg: '' } })
   }
 
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -71,6 +66,9 @@ export default function Register() {
     // Função auxiliar para definir erros
     const setError = (field: string, value: boolean, msg?: string) => {
       setErrors({ ...errors, [field]: { value, msg: msg || '' } })
+    }
+    const handleError = (field: string, value: boolean) => {
+      setErrors({ ...errors, [field]: value })
     }
 
     if (!data.name) {
@@ -119,66 +117,15 @@ export default function Register() {
         >
           Fazer login
         </Link>
-        <form className="flex flex-col" onSubmit={handleOnSubmit}>
-          <Input
-            placeholder="Nome"
-            name="name"
-            handleOnChange={handleOnChange}
-            error={errors.name}
-            text="Nome completo"
-            className="h-20"
-            errorMsg="Nome inválido"
-          />
-          <div className=" flex justify-between space-x-5 ">
-            <Select
-              name="gender"
-              id="genderSelect"
-              text="Genêro : "
-              handleOnChange={handleOnChangeSelect}
-              options={options}
-              error={errors.gender}
-            />
-            <Input
-              type="date"
-              name="date_of_birth"
-              handleOnChange={handleOnChange}
-              error={errors.date_of_birth}
-              text="Data de nascimento"
-              errorMsg="Data de nascimento inválida"
-            />
-          </div>
-          <Input
-            placeholder="Email"
-            name="email"
-            handleOnChange={handleOnChange}
-            error={errors.email.value}
-            text="Email"
-            className="h-20"
-            errorMsg={errors.email.msg || 'Email inválido'}
-          />
-          <Input
-            placeholder="Password"
-            name="password"
-            type="password"
-            handleOnChange={handleOnChange}
-            error={errors.password.value}
-            text="Senha"
-            className="h-20"
-          />
-          <Input
-            placeholder="Verify Password"
-            name="verifyPassword"
-            type="password"
-            handleOnChange={handleOnChange}
-            error={errors.password.value}
-            text="Confirme a senha"
-            errorMsg={errors.password.msg || 'Senha inválida'}
-            className="h-20"
-          />
-          <button className="rounded-md bg-teal-600 py-2 text-white">
-            Cadastrar
-          </button>
-        </form>
+        <FormsUser
+          handleOnChange={handleOnChange}
+          handleOnSubmit={handleOnSubmit}
+          handleOnChangeSelect={handleOnChangeSelect}
+          textButton="Cadastrar"
+          passwordInput={true}
+          DateGenderInput={true}
+          errors={errors}
+        />
       </div>
     </div>
   )

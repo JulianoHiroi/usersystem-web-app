@@ -6,12 +6,12 @@ import { AuthContext } from '../../hooks/auth'
 import Card from '../../components/card'
 import Image from 'next/image'
 import SinalMais from '../../assets/sinalMais.png'
-import ConfigIcon from '../../assets/engrenagem.png'
 import projectService from '../../services/ProjectService'
 import Overlay from '../../components/ovelay'
 import FormsProject from '../../components/formsProject'
 import Logo from '../../components/logo'
 import { Loading } from '../../components/loading'
+import ConfigUser from '../../components/configUser'
 
 export type ProjectProps = {
   name: string
@@ -26,20 +26,11 @@ export default function Dashboard() {
   const { user, signout } = useContext(AuthContext)
   const [projects, setProjects] = useState<ProjectProps[]>([])
   const [loading, setLoading] = useState(true)
-  const [visibleOverlay, setVisibleOverlay] = useState(false)
+  const [visibleOverlayCreateProject, setVisibleOverlayCreateProject] =
+    useState(false)
+  const [visibleOverlayUpdateUser, setVisibleOverlayUpdateUser] =
+    useState(false)
 
-  const handleVisible = (visible: boolean) => {
-    setVisibleOverlay(visible)
-  }
-  const handleCreateProject = async (project: ProjectCreateProps) => {
-    setVisibleOverlay(false)
-    await projectService.createProject(project)
-    getProjects()
-  }
-  const handleDeleteProject = (id: string) => {
-    projectService.deleteProject(id)
-    getProjects()
-  }
   const getProjects = async () => {
     await projectService
       .getProjects()
@@ -58,8 +49,25 @@ export default function Dashboard() {
       setLoading(true)
     }
   }, [user])
-  const handleOnCreateProject = () => {
-    setVisibleOverlay(true)
+
+  const handleVisible = (visible: boolean) => {
+    setVisibleOverlayCreateProject(visible)
+    setVisibleOverlayUpdateUser(visible)
+  }
+  const handleCreateProject = async (project: ProjectCreateProps) => {
+    setVisibleOverlayCreateProject(false)
+    await projectService.createProject(project)
+    getProjects()
+  }
+  const handleDeleteProject = (id: string) => {
+    projectService.deleteProject(id)
+    getProjects()
+  }
+  const handleOpenOvelayProject = () => {
+    setVisibleOverlayCreateProject(true)
+  }
+  const handleOpenOvelayUser = () => {
+    setVisibleOverlayUpdateUser(true)
   }
   const handleOnClickSignout = () => {
     signout()
@@ -74,7 +82,7 @@ export default function Dashboard() {
           <div className="absolute right-10 top-10 flex space-x-3">
             <button
               className=" rounded-md bg-zinc-500 p-2"
-              onClick={handleOnCreateProject}
+              onClick={handleOpenOvelayUser}
             >
               <FaGear className="h-10 w-10" color="black" opacity={0.75} />
             </button>
@@ -92,7 +100,7 @@ export default function Dashboard() {
 
           <div className=" grid grid-flow-col space-x-2 ">
             <div
-              onClick={handleOnCreateProject}
+              onClick={handleOpenOvelayProject}
               className="flex h-60 w-60 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-teal-500 shadow-lg hover:shadow-md hover:shadow-zinc-400 lg:max-w-4xl "
             >
               <Image
@@ -115,9 +123,14 @@ export default function Dashboard() {
           </div>
         </div>
       )}
-      {visibleOverlay && (
+      {visibleOverlayCreateProject && (
         <Overlay handleVisible={handleVisible}>
           <FormsProject handleData={handleCreateProject} />
+        </Overlay>
+      )}
+      {visibleOverlayUpdateUser && (
+        <Overlay handleVisible={handleVisible}>
+          <ConfigUser handleVisible={handleVisible} />
         </Overlay>
       )}
     </div>

@@ -24,9 +24,7 @@ const Select: React.FC<SelectProps> = ({
 }) => {
   return (
     <div className="mb-4">
-      <label className={className || ''}>
-        {text}
-      </label>
+      <label className={className || ''}>{text}</label>
       <select
         id={id}
         name={name}
