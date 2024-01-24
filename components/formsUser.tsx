@@ -1,6 +1,7 @@
 import Input from './input'
 import Select from './select'
 import { errorFormsUserProps } from '../app/register/page'
+import ButtonLoading from './buttonLoading'
 
 type userProps = {
   name: string
@@ -17,6 +18,7 @@ export type formsUserProps = {
   user?: userProps
   passwordInput: boolean
   DateGenderInput: boolean
+  Loading?: boolean
 }
 
 export function FormsUser({
@@ -28,6 +30,7 @@ export function FormsUser({
   user,
   passwordInput,
   DateGenderInput,
+  Loading,
 }: formsUserProps) {
   const options = [
     { name: 'Masculino', value: 'M' },
@@ -108,10 +111,13 @@ export function FormsUser({
           />
         </div>
       )}
-
-      <button className="rounded-md bg-teal-600 py-2 text-white">
-        {textButton}
-      </button>
+      {Loading ? (
+        <ButtonLoading />
+      ) : (
+        <button className="rounded-md bg-teal-600 py-2 text-white">
+          {textButton}
+        </button>
+      )}
     </form>
   )
 }

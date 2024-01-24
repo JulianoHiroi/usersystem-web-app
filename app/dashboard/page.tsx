@@ -1,4 +1,5 @@
 'use client'
+import './slider.css'
 import { FaGear } from 'react-icons/fa6'
 import { HiOutlineLogout } from 'react-icons/hi'
 import { useContext, useEffect, useState } from 'react'
@@ -12,11 +13,21 @@ import FormsProject from '../../components/formsProject'
 import Logo from '../../components/logo'
 import { Loading } from '../../components/loading'
 import ConfigUser from '../../components/configUser'
+import { Montserrat } from 'next/font/google'
+const montserrat = Montserrat({ weight: '400', subsets: ['latin'] })
 
 export type ProjectProps = {
   name: string
   description: string
   id: string
+  user: {
+    role: string
+    user: {
+      id: string
+      name: string
+      email: string
+    }
+  }[]
 }
 type ProjectCreateProps = {
   name: string
@@ -37,6 +48,7 @@ export default function Dashboard() {
       .then((response) => {
         setProjects(response)
         setLoading(false)
+        console.log(response)
       })
       .catch(() => {
         setLoading(true)
@@ -77,7 +89,7 @@ export default function Dashboard() {
       {loading ? (
         <Loading />
       ) : (
-        <div>
+        <>
           <Logo color={true} />
           <div className="absolute right-10 top-10 flex space-x-3">
             <button
@@ -98,30 +110,73 @@ export default function Dashboard() {
             </button>
           </div>
 
-          <div className=" grid grid-flow-col space-x-2 ">
-            <div
-              onClick={handleOpenOvelayProject}
-              className="flex h-60 w-60 cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-teal-500 shadow-lg hover:shadow-md hover:shadow-zinc-400 lg:max-w-4xl "
-            >
-              <Image
-                src={SinalMais}
-                width={100}
-                height={100}
-                alt="Imagem de sinal de mais"
-                className="opacity-90"
-              />
+          <div className="flex w-full flex-col items-center space-y-5">
+            <h1 className={montserrat.className + ' mt-12 text-xl'}>
+              Seus projetos
+            </h1>
+            <div className="flex h-60 w-11/12 justify-start overflow-hidden hover:overflow-auto ">
+              <div className="flex space-x-3 ">
+                <div
+                  onClick={handleOpenOvelayProject}
+                  className=" flex h-52 w-52 cursor-pointer items-center justify-center rounded-lg bg-teal-500 shadow-lg hover:shadow-md hover:shadow-zinc-400 lg:max-w-4xl"
+                >
+                  <Image
+                    src={SinalMais}
+                    width={100}
+                    height={100}
+                    alt="Imagem de sinal de mais"
+                    className="opacity-90"
+                  />
+                </div>
+                {projects
+                  .filter((project) => {
+                    return project.user.some((userProject) => {
+                      return (
+                        userProject.user.id === user?.id &&
+                        userProject.role === 'owner'
+                      )
+                    })
+                  })
+                  .map((project) => {
+                    return (
+                      <div className="slideCard" key={project.id}>
+                        <Card
+                          project={project}
+                          handleDeleteProject={handleDeleteProject}
+                        />
+                      </div>
+                    )
+                  })}
+              </div>
             </div>
-            {projects.map((project) => {
-              return (
-                <Card
-                  project={project}
-                  key={project.id}
-                  handleDeleteProject={handleDeleteProject}
-                />
-              )
-            })}
+            <h1 className={montserrat.className + ' text-xl'}>
+              Projetos compatilhados com você
+            </h1>
+            <div className="flex h-60 w-11/12 justify-start overflow-hidden hover:overflow-auto">
+              <div className="flex space-x-3 ">
+                {projects
+                  .filter((project) => {
+                    return project.user.some((userProject) => {
+                      return (
+                        userProject.user.id === user?.id &&
+                        userProject.role === 'member'
+                      )
+                    })
+                  })
+                  .map((project) => {
+                    return (
+                      <Card
+                        project={project}
+                        key={project.id}
+                        handleDeleteProject={handleDeleteProject}
+                        invisibleDelete={true}
+                      />
+                    )
+                  })}
+              </div>
+            </div>
           </div>
-        </div>
+        </>
       )}
       {visibleOverlayCreateProject && (
         <Overlay handleVisible={handleVisible}>

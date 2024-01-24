@@ -7,11 +7,13 @@ import { useRouter } from 'next/navigation'
 import { AuthContext } from '../../hooks/auth'
 
 import Link from 'next/link'
+import ButtonLoading from '../../components/buttonLoading'
 
 export default function Login() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
+  const [Loading, setLoading] = useState(false)
   const { signin } = useContext(AuthContext)
   const router = useRouter()
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,11 +24,12 @@ export default function Login() {
   }
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
+    setLoading(true)
     const response = await signin(email, password)
 
     if (response === 'error') {
       setError(true)
+      setLoading(false)
     }
     if (response === 'success') {
       router.push('/dashboard')
@@ -36,7 +39,6 @@ export default function Login() {
   return (
     <div className=" align-center  flex h-screen items-center justify-center bg-teal-500 ">
       <Logo />
-
       <div className=" flex w-min flex-col rounded-2xl bg-white p-10">
         <h1 className="mb-4  text-3xl font-bold">Login</h1>
         <form className="flex flex-col" onSubmit={handleOnSubmit}>
@@ -75,9 +77,14 @@ export default function Login() {
           <p className="h-12 pt-4 text-red-500">
             {error ? 'Email ou senha incorretos' : ''}
           </p>
-          <button className="rounded-md bg-teal-600 py-2 text-white">
-            Login
-          </button>
+
+          {Loading ? (
+            <ButtonLoading />
+          ) : (
+            <button className="relative rounded-md bg-teal-600 py-2 text-white ">
+              Login
+            </button>
+          )}
         </form>
       </div>
     </div>

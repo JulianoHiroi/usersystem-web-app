@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 
+body {
+  overflow: hidden auto;
+}
+
 scrollbar {
   scrollbar-width: none;
 }

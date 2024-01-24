@@ -30,6 +30,8 @@ export default function Register() {
     date_of_birth: { value: false, msg: '' },
     password: { value: false, msg: '' },
   })
+  const [Loading, setLoading] = useState(false)
+
   const router = useRouter()
   const { signup } = useContext(AuthContext)
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,10 +64,11 @@ export default function Register() {
 
   const handleOnSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
+    setLoading(true)
     // Função auxiliar para definir erros
     const setError = (field: string, value: boolean, msg?: string) => {
       setErrors({ ...errors, [field]: { value, msg: msg || '' } })
+      setLoading(false)
     }
     const handleError = (field: string, value: boolean) => {
       setErrors({ ...errors, [field]: value })
@@ -94,10 +97,10 @@ export default function Register() {
           setError('email', true, 'Email já cadastrado')
           break
         case 'Gender is required':
-          setError('gender', true)
+          setError('gender', true, "O campo 'Gênero' é obrigatório")
           break
         case 'Invalid date of birth':
-          setError('date_of_birth', true)
+          setError('date_of_birth', true, 'Data de nascimento inválida')
           break
         default:
           router.push('/dashboard')
@@ -124,6 +127,7 @@ export default function Register() {
           textButton="Cadastrar"
           passwordInput={true}
           DateGenderInput={true}
+          Loading={Loading}
           errors={errors}
         />
       </div>

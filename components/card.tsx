@@ -7,9 +7,14 @@ import { useState } from 'react'
 type CardProps = {
   project: ProjectProps
   handleDeleteProject: (id: string) => void
+  invisibleDelete?: boolean
 }
 
-export default function Card({ project, handleDeleteProject }: CardProps) {
+export default function Card({
+  project,
+  handleDeleteProject,
+  invisibleDelete,
+}: CardProps) {
   const [visibleCard, setVisibleCard] = useState(true)
   const [copied, setCopied] = useState(false)
   const handleOnClickDelete = () => {
@@ -29,7 +34,7 @@ export default function Card({ project, handleDeleteProject }: CardProps) {
       className={
         (!visibleCard && 'hidden') +
         ' ' +
-        'flex h-60 w-60 flex-col overflow-hidden rounded-lg bg-white p-5 shadow-lg lg:max-w-4xl'
+        'flex h-52 w-52 flex-col overflow-hidden rounded-lg bg-white p-5 shadow-lg lg:max-w-4xl'
       }
     >
       <h1 className="h-8 text-2xl font-bold">{project.name}</h1>
@@ -38,15 +43,23 @@ export default function Card({ project, handleDeleteProject }: CardProps) {
       </p>
       <div className="flex w-full items-end justify-between">
         <button
-          className="flex h-9 w-32  items-center justify-between space-x-2 rounded-md bg-teal-600 pl-2 pr-2"
+          className={
+            (invisibleDelete ? 'w-full' : '') +
+            ' ' +
+            'flex h-9 w-32  items-center justify-between space-x-2 rounded-md bg-teal-600 pl-2 pr-2'
+          }
           onClick={handleOnClickCopyShare}
         >
-          <p>{copied ? 'Copiado' : 'Copiar link'}</p>
-          <FiShare2 size={20} color="black" />
+          <p className="text-white">{copied ? 'Copiado' : 'Copiar link'}</p>
+          <FiShare2 size={20} color="white" />
         </button>
         <button
           onClick={handleOnClickDelete}
-          className="mt-3 w-fit rounded-md bg-red-600 p-2"
+          className={
+            (invisibleDelete ? 'hidden' : '') +
+            ' ' +
+            'mt-3 w-fit rounded-md bg-red-600 p-2'
+          }
         >
           <Image src={Lixeira} width={20} height={20} alt="Lixeira" />
         </button>

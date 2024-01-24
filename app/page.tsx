@@ -19,8 +19,18 @@ export default function Home() {
           />
         </div>
         <div className="mr-10 flex justify-end space-x-5">
-          <Link href={'./login'}>Login</Link>
-          <Link href={'./register'}>Register</Link>
+          <Link
+            href={'./login'}
+            className="text-xl font-bold text-white hover:text-teal-900"
+          >
+            Login
+          </Link>
+          <Link
+            href={'./register'}
+            className="text-xl font-bold text-white hover:text-teal-900"
+          >
+            Register
+          </Link>
         </div>
       </nav>
       <div>
@@ -50,7 +60,7 @@ export default function Home() {
       </div>
       <footer className="absolute bottom-0 flex h-28 w-full items-center justify-center space-x-32 bg-teal-500">
         <Link
-          href="https://github.com/JulianoHiroi"
+          href="https://www.instagram.com/julianohiroi/"
           target="_blank"
           className="text-md flex items-center text-teal-900"
         >
@@ -59,7 +69,7 @@ export default function Home() {
         </Link>
         <p className="text-md text-teal-900">&copy;2024 JulianoHiroi</p>
         <Link
-          href="https://www.instagram.com/julianohiroi/"
+          href="https://github.com/JulianoHiroi"
           target="_blank"
           className="text-md flex items-center text-teal-900"
         >
