@@ -4,12 +4,13 @@ import LogoImage from '../assets/logo-no-background.svg'
 import { Montserrat } from 'next/font/google'
 import { FaGithub } from 'react-icons/fa6'
 import { FaInstagram } from 'react-icons/fa'
+import './globals.css'
 const montserrat = Montserrat({ weight: '400', subsets: ['latin'] })
 
 export default function Home() {
   return (
-    <div className="flex h-screen flex-col">
-      <nav className="flex  h-24 w-full items-center justify-between bg-teal-500">
+    <div className="grid h-screen">
+      <nav className="flex  h-20 w-full items-center justify-between bg-teal-500">
         <div className="ml-10 flex items-center justify-center">
           <Image
             src={LogoImage}
@@ -40,7 +41,7 @@ export default function Home() {
         <div className="flex items-center justify-center">
           <p
             className={
-              'w-4/6 bg-gray-100 p-8   text-justify indent-5 text-xl shadow-md ' +
+              'w-4/6 p-8   text-justify indent-5 text-xl ' +
               montserrat.className
             }
           >
@@ -58,11 +59,11 @@ export default function Home() {
           </p>
         </div>
       </div>
-      <footer className="absolute bottom-0 flex h-28 w-full items-center justify-center space-x-32 bg-teal-500">
+      <footer className="bottom-0 flex min-h-20 w-full items-center justify-center space-x-32 bg-teal-500">
         <Link
           href="https://www.instagram.com/julianohiroi/"
           target="_blank"
-          className="text-md flex items-center text-teal-900"
+          className="text-md flex items-center pl-10 text-teal-900"
         >
           <FaInstagram />
           JulianoHiroi
@@ -71,7 +72,7 @@ export default function Home() {
         <Link
           href="https://github.com/JulianoHiroi"
           target="_blank"
-          className="text-md flex items-center text-teal-900"
+          className="text-md flex items-center pr-10 text-teal-900"
         >
           <FaGithub />
           JulianoHiroi

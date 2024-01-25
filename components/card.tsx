@@ -22,7 +22,7 @@ export default function Card({
     setVisibleCard(false)
   }
   const handleOnClickCopyShare = async () => {
-    const projectURL = `http://localhost:3000/dashboard/${project.id}`
+    const projectURL = `${window.location.href}/${project.id}`
     await navigator.clipboard.writeText(projectURL)
     setCopied(true)
     setTimeout(() => {
