@@ -109,8 +109,13 @@ export default function Register() {
   }
 
   return (
-    <div className=" align-center  flex h-screen items-center justify-center bg-teal-500 ">
-      <Logo />
+    <div className=" align-center flex  h-screen items-center justify-center bg-teal-500 ">
+      <div className='hidden md:flex'>
+        <Logo />
+      </div>
+
+
+
 
       <div className=" relative  flex flex-col rounded-2xl bg-white p-10">
         <h1 className="mb-4  text-3xl font-bold">Cadastro</h1>

@@ -5,8 +5,16 @@
 
 body {
   overflow: hidden auto;
+
 }
 
 scrollbar {
   scrollbar-width: none;
+}
+
+.sectionPrincipal{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
 }
