@@ -70,9 +70,6 @@ export default function Register() {
       setErrors({ ...errors, [field]: { value, msg: msg || '' } })
       setLoading(false)
     }
-    const handleError = (field: string, value: boolean) => {
-      setErrors({ ...errors, [field]: value })
-    }
 
     if (!data.name) {
       setError('name', true)

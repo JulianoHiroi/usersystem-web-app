@@ -40,7 +40,10 @@ export default function InviteProject({
           Você foi convidado para participar de um projeto, clique no botão
           abaixo para aceitar o convite
         </p>
-        <button className="rounded-md bg-[#163029] p-2 text-white" onClick={handleOnClick}>
+        <button
+          className="rounded-md bg-[#163029] p-2 text-white"
+          onClick={handleOnClick}
+        >
           Aceitar
         </button>
       </div>

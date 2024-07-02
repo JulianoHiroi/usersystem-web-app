@@ -35,7 +35,6 @@ type ProjectCreateProps = {
   description: string
 }
 export default function Dashboard() {
-
   const router = useRouter()
   const { user, signout } = useContext(AuthContext)
   const [projects, setProjects] = useState<ProjectProps[]>([])
@@ -127,7 +126,7 @@ export default function Dashboard() {
                     width={100}
                     height={100}
                     alt="Imagem de sinal de mais"
-                    className="opacity-90 colored-image"
+                    className="colored-image opacity-90"
                   />
                 </div>
                 {projects

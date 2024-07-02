@@ -17,7 +17,6 @@ export default function Login() {
   const { signin, signed } = useContext(AuthContext)
   const router = useRouter()
 
-
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     if (name === 'email') setEmail(value)

@@ -12,7 +12,7 @@ export default function RecoveryPassword() {
   const router = useRouter()
 
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const { value } = e.target
     setEmailRecovery(value)
     setError(false)
   }
@@ -22,7 +22,7 @@ export default function RecoveryPassword() {
   const handleOnClickSearch = () => {
     userService
       .recoveryPassword(emailRecovery)
-      .then((response) => {
+      .then(() => {
         router.push('/recovery-password/request-email')
       })
       .catch(() => {

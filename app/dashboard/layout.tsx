@@ -1,6 +1,6 @@
 'use client'
 
-import { Suspense, useContext, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { AuthContext } from '../../hooks/auth'
 import { useRouter } from 'next/navigation'
 export default function DashboardLayout({

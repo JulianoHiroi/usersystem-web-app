@@ -8,7 +8,6 @@ import './globals.css'
 const loraRegular = Lora({ weight: '400', subsets: ['latin'] })
 const loraSemiBold = Lora({ weight: '600', subsets: ['latin'] })
 
-
 export default function Home() {
   return (
     <div className="sectionPrincipal bg-[#163029]">
@@ -20,7 +19,7 @@ export default function Home() {
               width={150}
               height={150}
               alt="Picture of the logo"
-              className='fill-black'
+              className="fill-black"
             />
           </div>
           <div className=" mr-2 flex justify-end space-x-5 sm:mr-10">
@@ -38,37 +37,48 @@ export default function Home() {
             </Link>
           </div>
         </nav>
-
       </div>
-      <div className='h-full flex items-center'>
-        <h1 className={"mb-4  mt-10 flex w-full text-2xl items-center justify-center text-center md:text-7xl " + loraSemiBold.className}>
+      <div className="flex h-full items-center">
+        <h1
+          className={
+            'mb-4  mt-10 flex w-full items-center justify-center text-center text-2xl md:text-7xl ' +
+            loraSemiBold.className
+          }
+        >
           Bem vindo ao UserSystem
         </h1>
-
       </div>
       <div className="flex h-full items-end">
         <footer className="bottom-0 flex min-h-20  w-full items-center justify-center space-x-8  sm:space-x-16 md:space-x-32">
           <Link
             href="https://www.instagram.com/julianohiroi/"
             target="_blank"
-            className="flex items-center pl-10 text-2xl text-[#dae4e1] sm:text-xl gap-1"
+            className="flex items-center gap-1 pl-10 text-2xl text-[#dae4e1] sm:text-xl"
           >
             <FaInstagram />
-            <p className={"hidden sm:flex " + loraRegular.className}>JulianoHiroi</p>
+            <p className={'hidden sm:flex ' + loraRegular.className}>
+              JulianoHiroi
+            </p>
           </Link>
-          <p className={"text-center  text-xl text-[#dae4e1] " + loraRegular.className}>
+          <p
+            className={
+              'text-center  text-xl text-[#dae4e1] ' + loraRegular.className
+            }
+          >
             &copy; 2024 JulianoHiroi
           </p>
           <Link
             href="https://github.com/JulianoHiroi"
             target="_blank"
-            className="flex items-center pr-10 text-2xl text-[#dae4e1] sm:text-xl gap-1"
+            className="flex items-center gap-1 pr-10 text-2xl text-[#dae4e1] sm:text-xl"
           >
             <FaGithub />
-            <p className={"hidden sm:flex  " + loraRegular.className}>JulianoHiroi</p>
+            <p className={'hidden sm:flex  ' + loraRegular.className}>
+              JulianoHiroi
+            </p>
           </Link>
         </footer>
       </div>
-    </div >
+    </div>
   )
 }
