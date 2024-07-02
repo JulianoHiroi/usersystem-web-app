@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import LogoImage from '../assets/logo-no-background.svg'
 import Link from 'next/link'
-import LogoImageColor from '../assets/LogoBlue.png'
+import LogoImageColor from '../assets/logo-blue.svg'
 type LogoProps = {
   color?: boolean
 }

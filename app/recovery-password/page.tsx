@@ -31,7 +31,7 @@ export default function RecoveryPassword() {
   }
 
   return (
-    <div className=" align-center  flex h-screen items-center justify-center bg-teal-500 ">
+    <div className=" align-center  flex h-screen items-center justify-center bg-[#163029] ">
       <div className=" flex  flex-col rounded-2xl bg-white p-10">
         <Logo />
         <h1 className="mb-4  text-3xl font-bold">Encontre sua conta</h1>
@@ -56,7 +56,7 @@ export default function RecoveryPassword() {
             Cancelar
           </button>
           <button
-            className="rounded-md bg-teal-600 py-2 pl-3  pr-3 text-white"
+            className="rounded-md bg-[#163029] py-2 pl-3  pr-3 text-white"
             onClick={handleOnClickSearch}
           >
             Procurar

@@ -104,7 +104,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         return 'sucess'
       })
       .catch((error) => {
-        console.log(error)
         return error.response.data.message
       })
     return response

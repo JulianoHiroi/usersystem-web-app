@@ -52,7 +52,7 @@ export default function FormsProject({ handleData }: formsProjectProps) {
         <div className="flex w-full items-center justify-end pr-5">
           <button
             type="submit"
-            className="w-16  rounded-md bg-teal-600 py-2 text-white"
+            className="w-16  rounded-md bg-[#163029] py-2 text-white"
           >
             Criar
           </button>

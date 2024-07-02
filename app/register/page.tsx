@@ -109,7 +109,7 @@ export default function Register() {
   }
 
   return (
-    <div className=" align-center flex  h-screen items-center justify-center bg-teal-500 ">
+    <div className=" align-center flex  h-screen items-center justify-center bg-[#163029] ">
       <div className="hidden md:flex">
         <Logo />
       </div>

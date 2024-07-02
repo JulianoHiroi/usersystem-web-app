@@ -1,6 +1,6 @@
 export default function ButtonLoading() {
   return (
-    <div className="flex w-full items-center justify-center  rounded-md bg-teal-600 py-2 text-center   text-white shadow-md transition duration-200 ease-in ">
+    <div className="flex w-full items-center justify-center  rounded-md bg-[#163029] py-2 text-center   text-white shadow-md transition duration-200 ease-in ">
       <svg
         width="20"
         height="20"

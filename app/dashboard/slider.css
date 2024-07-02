@@ -21,3 +21,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #81818143;
 }
+
+.colored-image {
+  filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(90deg);
+}

@@ -14,6 +14,7 @@ import Logo from '../../components/logo'
 import { Loading } from '../../components/loading'
 import ConfigUser from '../../components/configUser'
 import { Montserrat } from 'next/font/google'
+import { useRouter } from 'next/navigation'
 const montserrat = Montserrat({ weight: '400', subsets: ['latin'] })
 
 export type ProjectProps = {
@@ -34,6 +35,8 @@ type ProjectCreateProps = {
   description: string
 }
 export default function Dashboard() {
+
+  const router = useRouter()
   const { user, signout } = useContext(AuthContext)
   const [projects, setProjects] = useState<ProjectProps[]>([])
   const [loading, setLoading] = useState(true)
@@ -48,7 +51,6 @@ export default function Dashboard() {
       .then((response) => {
         setProjects(response)
         setLoading(false)
-        console.log(response)
       })
       .catch(() => {
         setLoading(true)
@@ -118,14 +120,14 @@ export default function Dashboard() {
               <div className="flex space-x-3 ">
                 <div
                   onClick={handleOpenOvelayProject}
-                  className=" flex h-52 w-52 cursor-pointer items-center justify-center rounded-lg bg-teal-500 shadow-lg hover:shadow-md hover:shadow-zinc-400 lg:max-w-4xl"
+                  className=" flex h-52 w-52 cursor-pointer items-center justify-center rounded-lg bg-[#163029] shadow-lg hover:shadow-md hover:shadow-zinc-400 lg:max-w-4xl"
                 >
                   <Image
                     src={SinalMais}
                     width={100}
                     height={100}
                     alt="Imagem de sinal de mais"
-                    className="opacity-90"
+                    className="opacity-90 colored-image"
                   />
                 </div>
                 {projects

@@ -114,7 +114,7 @@ export function FormsUser({
       {Loading ? (
         <ButtonLoading />
       ) : (
-        <button className="rounded-md bg-teal-600 py-2 text-white">
+        <button className="rounded-md bg-[#163029] py-2 text-white">
           {textButton}
         </button>
       )}

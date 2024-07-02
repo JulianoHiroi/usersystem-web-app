@@ -2,7 +2,7 @@
 import Image from 'next/image'
 import Logo from '../../components/logo'
 import Input from '../../components/input'
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { AuthContext } from '../../hooks/auth'
 
@@ -14,8 +14,10 @@ export default function Login() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState(false)
   const [Loading, setLoading] = useState(false)
-  const { signin } = useContext(AuthContext)
+  const { signin, signed } = useContext(AuthContext)
   const router = useRouter()
+
+
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     if (name === 'email') setEmail(value)
@@ -37,7 +39,7 @@ export default function Login() {
   }
 
   return (
-    <div className=" align-center  flex h-screen items-center justify-center bg-teal-500 ">
+    <div className=" align-center  flex h-screen items-center justify-center bg-[#163029] ">
       <Logo />
       <div className=" flex w-min flex-col rounded-2xl bg-white p-10">
         <h1 className="mb-4  text-3xl font-bold">Login</h1>
@@ -81,7 +83,7 @@ export default function Login() {
           {Loading ? (
             <ButtonLoading />
           ) : (
-            <button className="relative rounded-md bg-teal-600 py-2 text-white ">
+            <button className="relative rounded-md bg-[#163029] py-2 text-white ">
               Login
             </button>
           )}

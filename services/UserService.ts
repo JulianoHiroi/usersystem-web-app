@@ -46,7 +46,6 @@ class UserService {
         date_of_birth: user.date_of_birth,
       })
       .then((res) => {
-        console.log(res.data)
         return res.data
       })
       .catch((res) => {

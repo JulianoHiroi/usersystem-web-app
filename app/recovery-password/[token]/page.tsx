@@ -48,7 +48,7 @@ export default function RecoveryPasswordToken({
     }
   }
   return (
-    <div className=" align-center  flex h-screen items-center justify-center bg-teal-500 ">
+    <div className=" align-center  flex h-screen items-center justify-center bg-[#163029] ">
       <Logo />
       <div className=" relative  flex flex-col rounded-2xl bg-white p-10">
         <h1 className="mb-4  text-3xl font-bold">Mudar a senha</h1>
@@ -77,7 +77,7 @@ export default function RecoveryPasswordToken({
 
           <div className="flex items-end justify-end">
             <button
-              className="rounded-md bg-teal-600 py-2 pl-3 pr-3 text-white"
+              className="rounded-md bg-[#163029] py-2 pl-3 pr-3 text-white"
               type="submit"
             >
               Alterar senha

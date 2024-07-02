@@ -46,7 +46,7 @@ export default function Card({
           className={
             (invisibleDelete ? 'w-full' : '') +
             ' ' +
-            'flex h-9 w-32  items-center justify-between space-x-2 rounded-md bg-teal-600 pl-2 pr-2'
+            'flex h-9 w-32  items-center justify-between space-x-2 rounded-md bg-[#163029] pl-2 pr-2'
           }
           onClick={handleOnClickCopyShare}
         >
