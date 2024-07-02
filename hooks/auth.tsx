@@ -56,8 +56,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (storagedUser && storagedToken) {
       setUser(JSON.parse(storagedUser))
       setToken(storagedToken)
+      //Faz verificação se o token é válido
       api.defaults.headers.Authorization = `Bearer ${storagedToken}`
-      setSigned(true)
+      api.get('/users/verify').then(() => {
+        setSigned(true)
+      }).catch(() => {
+        setSigned(false)
+      })
     } else {
       setSigned(false)
     }
