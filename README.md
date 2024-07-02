@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# UserSystem - Front-end
 
-First, run the development server:
+UserSystem é um sistema de login e cadastro de usuários. O sistema possui telas de login, cadastro e dashboard. Foram desenvolvidos todos os fluxos básicos de um sistema de login padrão, incluindo formulários de login, formulários de cadastro com verificações de senha e informações, e recuperação de senha por email. Além disso, cada usuário pode ter projetos e compartilhá-los com outros usuários através de links de convite. Este projeto foi desenvolvido utilizando Next.js, TypeScript e TailwindCSS.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Funcionalidades
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- **Login e Cadastro:** Fluxos completos de autenticação, incluindo verificações de senha e recuperação de senha por email.
+- **Dashboard:** Interface amigável para gerenciamento de contas e projetos.
+- **Compartilhamento de Projetos:** Permite aos usuários compartilhar seus projetos com outros usuários através de links de convite.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Pré-requisitos
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Node.js
+- Yarn ou npm
 
-## Learn More
+## Como rodar o projeto localmente
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/JulianoHiroi/UserSystem.git
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd UserSystem
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+3. Instale as dependências:
+   ```bash
+   yarn install
+   npm install
 
-## Deploy on Vercel
+4. Inicie o servidor de desenvolvimento:
+   ```bash
+   yarn run dev
+   npm run dev
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Tecnologias Utilizadas
+
+- **Next.js:** Framework React para construção de interfaces de usuário.
+- **Typescript:** Superset do JavaScript que adiciona tipagem estática.
+- **TailwindCSS:** Framework CSS para estilização.
+
+## Contribuições
+Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request.
