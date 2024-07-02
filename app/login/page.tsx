@@ -38,6 +38,12 @@ export default function Login() {
     }
   }
 
+  useEffect(() => {
+    if (signed) {
+      router.push('/dashboard')
+    }
+  }, [signed])
+
   return (
     <div className=" align-center  flex h-screen items-center justify-center bg-[#163029] ">
       <Logo />
